@@ -1,0 +1,43 @@
+<h1>Painel Admin</h1>
+
+<input id="nome" placeholder="Nome"><br>
+<input id="link" placeholder="Link afiliado"><br>
+<input id="img" placeholder="Imagem"><br>
+<input id="preco" placeholder="Preço"><br>
+
+<button onclick="add()">Adicionar</button>
+
+<script>
+function add(){
+  fetch('/add',{
+    method:'POST',
+    headers:{'Content-Type':'application/json'},
+    body:JSON.stringify({
+      nome:nome.value,
+      link:link.value,
+      imagem:img.value,
+      preco:preco.value
+    })
+  }).then(()=>alert('Produto adicionado'))
+}
+</script>
+<canvas id="grafico"></canvas>
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+<script>
+fetch('/stats')
+.then(r=>r.json())
+.then(dados=>{
+  new Chart(document.getElementById('grafico'),{
+    type:'bar',
+    data:{
+      labels:Object.keys(dados),
+      datasets:[{
+        label:'Cliques',
+        data:Object.values(dados)
+      }]
+    }
+  })
+})
+</script>

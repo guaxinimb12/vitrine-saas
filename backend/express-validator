@@ -1,0 +1,13 @@
+const { body, validationResult } = require("express-validator");
+
+app.post("/register",
+  body("email").isEmail(),
+  body("senha").isLength({ min: 8 }),
+  (req, res) => {
+    const errors = validationResult(req);
+    if (!errors.isEmpty()) {
+      return res.status(400).json({ errors: errors.array() });
+    }
+    // ... cadastro
+  }
+);

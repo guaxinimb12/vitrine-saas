@@ -1,0 +1,12 @@
+@keyframes zoom {
+  from { transform: scale(1.2); opacity:0; }
+  to { transform: scale(1); opacity:1; }
+}
+
+#loading {
+  animation: zoom 1s ease;
+}
+
+.card {
+  animation: zoom .6s ease;
+}

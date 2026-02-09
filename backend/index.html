@@ -1,0 +1,23 @@
+<div id="produtos"></div>
+
+<script>
+fetch('/produtos')
+  .then(r => r.json())
+  .then(produtos => {
+    const div = document.getElementById('produtos');
+
+    produtos.forEach(p => {
+      div.innerHTML += `
+        <div class="card">
+          <img src="${p.imagem}" width="200">
+          <h3>${p.nome}</h3>
+          <p>${p.descricao}</p>
+          <strong>R$ ${p.preco}</strong><br>
+          <a href="${p.link}" target="_blank">
+            <button>Comprar</button>
+          </a>
+        </div>
+      `;
+    });
+  });
+</script>

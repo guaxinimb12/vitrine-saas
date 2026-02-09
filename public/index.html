@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <title>Marketplace Digital Seguro</title>
+
+  <!-- SEO -->
+  <meta name="description" content="Marketplace profissional com produtos digitais, Pix e IA recomendando ofertas.">
+  <meta name="robots" content="index, follow">
+
+  <style>
+    body {
+      margin: 0;
+      background: #0b0f1a;
+      color: white;
+      font-family: Arial;
+      overflow: hidden;
+    }
+
+    #loading {
+      position: fixed;
+      inset: 0;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+    }
+
+    #bar {
+      width: 80%;
+      height: 20px;
+      background: #222;
+      border-radius: 10px;
+      overflow: hidden;
+      margin-top: 20px;
+    }
+
+    #progress {
+      height: 100%;
+      width: 0%;
+      background: linear-gradient(90deg, green, yellow);
+      transition: width 0.3s;
+    }
+
+    #app {
+      display: none;
+      padding: 20px;
+    }
+  </style>
+</head>
+<body>
+
+<div id="loading">
+  <h2>🇧🇷 Carregando sistema seguro...</h2>
+  <div id="bar">
+    <div id="progress"></div>
+  </div>
+</div>
+
+<div id="app">
+  <h1>🔥 Produtos recomendados</h1>
+  <div id="produtos"></div>
+</div>
+
+<script>
+  let p = 0;
+  const prog = document.getElementById("progress");
+
+  const timer = setInterval(() => {
+    p += 5;
+    prog.style.width = p + "%";
+
+    if (p >= 100) {
+      clearInterval(timer);
+      document.getElementById("loading").style.display = "none";
+      document.getElementById("app").style.display = "block";
+      carregarProdutos();
+    }
+  }, 180); // ~18 segundos
+</script>
+
+<script>
+async function carregarProdutos() {
+  try {
+    const res = await fetch("/api/produtos");
+    const data = await res.json();
+
+    const div = document.getElementById("produtos");
+    data.forEach(p => {
+      div.innerHTML += `<p>💰 ${p.nome} — R$ ${p.preco}</p>`;
+    });
+  } catch (e) {
+    document.getElementById("produtos").innerHTML = "Erro ao carregar produtos";
+  }
+}
+</script>
+
+</body>
+</html>
