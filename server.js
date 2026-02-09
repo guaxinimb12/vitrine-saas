@@ -2,16 +2,18 @@ const express = require("express");
 const path = require("path");
 
 const app = express();
-const PORT = process.env.PORT || 3000;
+const PORT = 3000;
 
-// servir arquivos HTML, CSS, JS
-app.use(express.static(path.join(__dirname, "public")));
+app.use(express.static(path.join(__dirname, "../public")));
 
-// rota principal
-app.get("/", (req, res) => {
-  res.sendFile(path.join(__dirname, "public", "index.html"));
+app.get("/api/produtos", (req, res) => {
+  res.json([
+    { nome: "Curso Renda Online", preco: 97 },
+    { nome: "IA para Negócios", preco: 147 },
+    { nome: "Marketing Digital Pro", preco: 197 }
+  ]);
 });
 
 app.listen(PORT, "0.0.0.0", () => {
-  console.log(`🚀 Servidor rodando na porta ${PORT}`);
+  console.log("Servidor rodando na porta", PORT);
 });
