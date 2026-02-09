@@ -1,19 +1,31 @@
 const express = require("express");
-const path = require("path");
+const cors = require("cors");
 
 const app = express();
-const PORT = 3000;
+const PORT = process.env.PORT || 3000;
 
-app.use(express.static(path.join(__dirname, "../public")));
+// Middlewares globais
+app.use(cors());
+app.use(express.json());
 
-app.get("/api/produtos", (req, res) => {
-  res.json([
-    { nome: "Curso Renda Online", preco: 97 },
-    { nome: "IA para Negócios", preco: 147 },
-    { nome: "Marketing Digital Pro", preco: 197 }
-  ]);
+// Health (Render)
+app.get("/health", (req, res) => {
+  res.status(200).json({
+    status: "ok",
+    uptime: process.uptime(),
+    timestamp: Date.now()
+  });
 });
 
-app.listen(PORT, "0.0.0.0", () => {
-  console.log("Servidor rodando na porta", PORT);
+// Rotas versionadas
+const apiRoutes = require("./src/routes");
+app.use("/api/v1", apiRoutes);
+
+// Fallback
+app.use((req, res) => {
+  res.status(404).json({ error: "Rota não encontrada" });
+});
+
+app.listen(PORT, () => {
+  console.log(`🚀 API SaaS rodando na porta ${PORT}`);
 });
