@@ -1,15 +1,21 @@
-const express = require("express");
-const path = require("path");
+const express = require("express")
+const cors = require("cors")
 
-const app = express();
-const PORT = process.env.PORT || 3000;
+const app = express()
 
-app.use(express.static(path.join(__dirname, "../public")));
+app.use(cors())
+app.use(express.json())
 
-app.get("*", (req, res) => {
-  res.sendFile(path.join(__dirname, "../public/index.html"));
-});
+app.get("/", (req,res)=>{
+res.send("API MinhaCompra funcionando 🚀")
+})
 
-app.listen(PORT, () => {
-  console.log("Servidor rodando na porta " + PORT);
-});
+app.get("/health", (req,res)=>{
+res.json({status:"ok"})
+})
+
+const PORT = process.env.PORT || 3000
+
+app.listen(PORT, ()=>{
+console.log("Servidor rodando na porta", PORT)
+})
