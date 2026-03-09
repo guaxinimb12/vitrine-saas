@@ -1,0 +1,35 @@
+<h1>Marketplace MinhaCompra</h1>
+
+<div id="products"></div>
+
+<script>
+
+fetch("/api/products")
+.then(r=>r.json())
+.then(data=>{
+
+const container=document.getElementById("products")
+
+data.forEach(p=>{
+
+container.innerHTML+=`
+
+<div style="border:1px solid #ddd;padding:10px;margin:10px">
+
+<h2>${p.name}</h2>
+
+<p>${p.price}</p>
+
+<a href="/produto/${p.slug}">
+Ver produto
+</a>
+
+</div>
+
+`
+
+})
+
+})
+
+</script>

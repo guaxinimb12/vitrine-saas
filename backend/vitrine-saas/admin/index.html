@@ -1,0 +1,37 @@
+<h1>Painel Admin</h1>
+
+<input id="name" placeholder="Produto">
+<input id="price" placeholder="Preço">
+<input id="desc" placeholder="Descrição">
+<input id="slug" placeholder="Slug">
+<input id="link" placeholder="Link afiliado">
+
+<button onclick="add()">Adicionar Produto</button>
+
+<script>
+
+function add(){
+
+fetch("/api/products",{
+
+method:"POST",
+
+headers:{
+"Content-Type":"application/json"
+},
+
+body:JSON.stringify({
+
+name:document.getElementById("name").value,
+price:document.getElementById("price").value,
+description:document.getElementById("desc").value,
+slug:document.getElementById("slug").value,
+affiliate:document.getElementById("link").value
+
+})
+
+})
+
+}
+
+</script>

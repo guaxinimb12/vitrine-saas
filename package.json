@@ -6,7 +6,7 @@
     "start": "node server.js"
   },
   "dependencies": {
-    "axios": "^1.13.4",
+    "axios": "^1.13.6",
     "bcryptjs": "^3.0.3",
     "cors": "^2.8.6",
     "cron": "^4.4.0",
@@ -17,6 +17,21 @@
     "express-validator": "^7.3.1",
     "gyp": "^0.3.0",
     "helmet": "^8.1.0",
+    "mongodb": "^7.1.0",
+    "node-cron": "^4.2.1",
     "sanitize-html": "^2.17.0"
-  }
+  },
+  "description": "",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/guaxinimb12/vitrine-saas.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/guaxinimb12/vitrine-saas/issues"
+  },
+  "homepage": "https://github.com/guaxinimb12/vitrine-saas#readme"
 }
