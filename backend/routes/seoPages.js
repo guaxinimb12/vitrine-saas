@@ -1,21 +1,20 @@
 const express = require("express")
 const router = express.Router()
 
-router.get("/:slug",(req,res)=>{
+router.get("/generate",(req,res)=>{
 
-const slug = req.params.slug
+let pages=[]
 
-res.send(`
-<html>
+for(let i=1;i<=10000;i++){
 
-<title>${slug} preço e avaliação</title>
+pages.push({
+url:"/produto-"+i,
+title:"Produto "+i+" barato online"
+})
 
-<h1>${slug}</h1>
+}
 
-<p>Veja análise completa do produto ${slug}</p>
-
-</html>
-`)
+res.json(pages)
 
 })
 
