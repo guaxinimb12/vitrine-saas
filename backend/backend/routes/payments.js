@@ -3,8 +3,8 @@ const router = express.Router()
 
 router.post('/pix', (req, res) => {
   res.json({
-    status: "PIX gerado",
-    code: "000201PIXEXEMPLO"
+    status: "Pagamento PIX criado",
+    qr_code: "pix-exemplo"
   })
 })
 
